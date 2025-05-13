@@ -10,7 +10,14 @@ In this approach, we create a network with two branches: one with a standard CNN
 %-------------------------------------------------------------------------
 \subsection{Take Best Confidence}
 
-This approach is based on the intuition that when a rotated image is passed through a standard CNN, the CNN may not recognize the pattern if it has not seen that specific rotation during training. This leads to a more spread-out confidence score across different classes, resulting in a lower peak confidence.  RIC-CNN, on the other hand, is expected to produce a more reliable prediction due to its rotational invariance. Therefore, in this approach, we take the prediction with the highest confidence score from either the CNN or the RIC-CNN.
+This approach is based on the intuition that when a rotated image is passed through a standard CNN, the CNN may not recognize the pattern if it has not seen that specific rotation during training. This leads to a more spread-out confidence score across different classes, resulting in a lower peak confidence.  RIC-CNN, on the other hand, is expected to produce a more reliable prediction with a higher peak confidence due to its rotational invariance.
+\\ \\
+Similarly, when an unrotated image is passed through an RIC-CNN, examples like label 6 and 9 in MNIST will look the same for RIC-CNN because of its rotational invariance property. This leads to a more spread-out confidence score across these classes, resulting in a lower peak confidence. In this case, standard CNN can clearly distinguish the difference between these labels and give more concentrated and higher peak confidence compared to RIC-CNN.
+\\ \\
+Therefore, in this approach, we take the prediction with the highest confidence score from either the CNN or the RIC-CNN to be the output.
+
+\subsubsection{Notation}
+
 
 %-------------------------------------------------------------------------
 \subsection{Feature Fusion}
