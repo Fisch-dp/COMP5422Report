@@ -17,7 +17,7 @@ Similarly, when an unrotated image is passed through an RIC-CNN, examples like l
 Therefore, in this approach, we take the prediction with the highest confidence score from either the CNN or the RIC-CNN to be the output.
 
 \subsubsection{Notation}
-Let $I \in \mathbb{R}^{H \times W \times C}$ be the input image, $\mathbf{y}_c \in \mathbb{R}^{C_l} = f_c(I, \hat{\theta}_c)$ and $\mathbf{y}_r \in \mathbb{R}^{C_l} = f_r(I, \hat{\theta}_r)$
+Let $I \in \mathbb{R}^{H \times W \times C}$ be the input image, $\mathbf{y}_c \in \mathbb{R}^{C_l} = f_c(I, \hat{\theta}_c)$ and $\mathbf{y}_r \in \mathbb{R}^{C_l} = f_r(I, \hat{\theta}_r)$, where $\mathbf{y}_c$ and $\mathbf{y}_r$ are the prediction logits of the standard CNN $f_c$ and RIC-CNN $f_r$ respectively, with their corresponding weights $\hat{\theta}_c$ and $\hat{\theta}_r$.
 
 %-------------------------------------------------------------------------
 \subsection{Feature Fusion}
