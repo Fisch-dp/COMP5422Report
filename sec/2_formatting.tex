@@ -32,7 +32,7 @@ The \textit{Take Best Confidence} will not be used in the training stage to prev
 In prediction stage, both branches will contribute to the prediction to produce confidence scores $\mathbf{c}_c \in \mathbb{R}^{C_l}$ and $\mathbf{c}_r \in \mathbb{R}^{C_l}$ to each label class. We look for the maximum confidence score of each labels between the two branches, and select the label with the highest confidence as the final prediction output.
 More specifically, we determine the prediction output $p$ by:
 $$
-p = \argmax_c(\mathbf{z}[c]),\ \mathbf{z} = \max(\mathbf{c}_c, \mathbf{c}_r),\ \mathbf{c}_i = \sigma_s(\mathbf{y}_i)
+p = \argmax_c(\mathbf{z}_c),\ \mathbf{z_i} = \max(\mathbf{c}_{c,i}, \mathbf{c}_{r,i}),\ \mathbf{c}_j = \sigma_s(\mathbf{y}_j),\ j \in {c, r}
 $$
 %-------------------------------------------------------------------------
 \subsection{Feature Fusion}
