@@ -27,6 +27,9 @@ $$
 where $\mathcal{L}_{CE}$ denote the cross-entropy loss function, $\sigma_s$ denote the softmax function, and $\mathbf{y} \in \mathbb{R}^{C_l}$ is the one-hot representation of the ground truth label.
 \\ \\
 The \textit{Take Best Confidence} will not be used in the training stage to prevent training collapse to one model as only one branch of the model will the gradient of the loss flows through after taking maximum on confidence scores between the two.
+
+\subsubsection{Take Best Confidence Prediction}
+In prediction stage, both branches will contribute to the prediction to produce confidence scores $\mathbf{c}_c \in \mathbb{R}^{C_l}$ and $\mathbf{c}_r \in \mathbb{R}^{C_l}$ to each label class. We look for the maximum 
 %-------------------------------------------------------------------------
 \subsection{Feature Fusion}
 
