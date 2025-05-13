@@ -24,7 +24,7 @@ Both standard CNN branch and RIC-CNN branch are trained independently with the c
 $$
 \mathcal{L} = \mathcal{L}_{CE}(\sigma_s(\mathbf{y}_c), \mathbf{y}) + \mathcal{L}_{CE}(\sigma_s(\mathbf{y}_r), \mathbf{y})
 $$
-where $\mathcal{L}_{CE}$ denote the cross-entropy loss function, $\sigma_s$ denote the softmax function, and \mathbf{y} is the one-hot representation of the ground truth label.
+where $\mathcal{L}_{CE}$ denote the cross-entropy loss function, $\sigma_s$ denote the softmax function, and $\mathbf{y} \in \mathbb{R}^{C_l}$ is the one-hot representation of the ground truth label.
 
 %-------------------------------------------------------------------------
 \subsection{Feature Fusion}
