@@ -44,12 +44,12 @@ Mo and Zhao (2022) introduce the \emph{Rotation-Invariant Coordinate Convolution
 \noindent
 where \(S\) is the usual fixed sampling grid (e.g.\ a \(3\times3\) neighborhood) and \(W(P)\) are the kernel weights.
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=1.0\linewidth]{~/pics/ric_sample.png}
-%     \caption{Two sets of sampling points used for calculating $\Phi_C$ and $\Phi_{\mathrm{RIC}-C}$, respectively. It is clear that $Q_\alpha\in\mathcal T$ can be regarded as the corresponding point of $P_\alpha\in\mathcal S$, where $\alpha=0,1,2,\dots,4n^2+4n$.}
-%     \label{fig:ric_sample}
-% \end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{author-kit-CVPR2025-v3.1-latex-/pics/ric_sample.png}
+    \caption{Two sets of sampling points used for calculating $\Phi_C$ and $\Phi_{\mathrm{RIC}-C}$, respectively. It is clear that $Q_\alpha\in\mathcal T$ can be regarded as the corresponding point of $P_\alpha\in\mathcal S$, where $\alpha=0,1,2,\dots,4n^2+4n$.}
+    \label{fig:ric_sample}
+\end{figure}
 RIC-C replaces the fixed grid \(S\) by a \emph{rotation-aware} sampling pattern \(\mathcal T_{X_0}\).  Define
 \[
 \varphi \;=\;atan2\bigl(x^0_2,\,x^0_1\bigr)
