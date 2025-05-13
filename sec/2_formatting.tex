@@ -1,0 +1,44 @@
+\section{Methodology}
+\label{sec:method}
+
+In this section, we describe the three methods we employ to combine CNNs and RIC-CNNs:
+%-------------------------------------------------------------------------
+\subsection{Double Branch Model}
+
+In this approach, we create a network with two branches: one with a standard CNN architecture, and the other with a RIC-CNN architecture. The idea is to allow each branch to learn different aspects of the input image. The CNN branch learns the detailed features, and the RIC-CNN branch learns the rotationally invariant features. The outputs of the two branches are then combined to make the final prediction.  In our implementation, the RIC-CNN branch is frozen for the first few epochs of training. This allows the CNN branch to initially learn basic features without being influenced by the RIC-CNN branch.
+
+%-------------------------------------------------------------------------
+\subsection{Take Best Confidence}
+
+This approach is based on the intuition that when a rotated image is passed through a standard CNN, the CNN may not recognize the pattern if it has not seen that specific rotation during training. This leads to a more spread-out confidence score across different classes, resulting in a lower peak confidence.  RIC-CNN, on the other hand, is expected to produce a more reliable prediction due to its rotational invariance. Therefore, in this approach, we take the prediction with the highest confidence score from either the CNN or the RIC-CNN.
+
+%-------------------------------------------------------------------------
+\subsection{Feature Fusion}
+
+RIC–CNN’s intermediate feature maps are rotation-equivariant: when the input is rotated, the RIC branch’s feature map $F_r$ rotates correspondingly before global averaging. In contrast, a standard CNN’s feature map $F_c$ remains rotationally variant. This mismatch between $F_r$ and $F_c$ encodes rich rotational information. To harness this, we propose a \emph{Feature Fusion} module that compares and dynamically weights these two feature maps to extract and leverage rotational cues for improved robustness.
+
+\subsubsection{Notation}
+Let $F_r\in\mathbb{R}^{H\times W\times C}$ be the feature map produced by the RIC branch and $F_c\in\mathbb{R}^{H\times W\times C}$ the feature map from the standard CNN branch at the same spatial resolution and channel dimensionality.
+
+\subsubsection{Weight Generation}
+We concatenate the two feature maps along the channel dimension and pass them through a $1\times1$ convolutional layer $g(\cdot)$, followed by a sigmoid activation to produce a spatially-varying weight map:
+\[
+W = \sigma\bigl(g([F_r \| F_c])\bigr),
+\]
+where $[\cdot\|\cdot]$ denotes channel-wise concatenation and $\sigma$ is the element-wise sigmoid.
+
+\subsubsection{Fused Representation}
+The fused feature map $F_f$ is computed as a per-pixel interpolation of $F_r$ and $F_c$:
+\[
+F_f = W \odot F_r + (1 - W) \odot F_c,
+\]
+where $\odot$ denotes broadcasted element-wise multiplication. In regions where the RIC branch’s rotation-equivariant features are more informative, $W$ approaches 1; elsewhere, the standard CNN features dominate.
+
+\subsubsection{Auxiliary Supervision}
+To encourage each branch to learn discriminative features, we attach auxiliary classifiers $h_r(\cdot)$ and $h_c(\cdot)$ to $F_r$ and $F_c$, respectively. The final classification is performed by $h_f(F_f)$. The overall loss is:
+\[
+\mathcal{L} = \mathcal{L}_{\mathrm{CE}}\bigl(h_f(F_f), y\bigr) + \lambda_r \, \mathcal{L}_{\mathrm{CE}}\bigl(h_r(F_r), y\bigr) + \lambda_c \, \mathcal{L}_{\mathrm{CE}}\bigl(h_c(F_c), y\bigr),
+\]
+where $\mathcal{L}_{\mathrm{CE}}$ is the cross-entropy loss, $y$ the ground-truth label, and $\lambda_r,\lambda_c$ balance the auxiliary terms.
+
+This fusion mechanism dynamically extracts rotational information from the mismatch between equivariant and variant feature maps, leading to balanced performance on both rotated and non-rotated inputs.
