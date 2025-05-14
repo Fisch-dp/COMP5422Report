@@ -4,10 +4,17 @@
 In this section, we present the results of our experiments on the MNIST and Traffic Signs datasets.
 
 \subsection{MNIST Dataset}
-Our experiments on the MNIST dataset demonstrate the effectiveness of our proposed methods in handling rotated digits. The Double Branch model, Take Best Confidence, and Feature Fusion approaches all show improved performance compared to a standard CNN. In particular, the Feature Fusion method achieves the best results, demonstrating the benefit of combining both rotation-invariant and rotation-equivariant features.
+Our experiments on the MNIST dataset demonstrate the effectiveness of our proposed methods in handling rotated digits. 
+The Double Branch model, Take Best Confidence, and Feature Fusion approaches all show improved performance compared to a standard CNN. 
+In particular, the Feature Fusion method achieves the best results, demonstrating the benefit of combining both rotation-invariant and rotation-equivariant features.
+The results are shown in \cref{fig:mnist_results}.
 
-\subsubsection{Feature Fusion}
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{pics/mnist_results.png}
+    \caption{Results on the MNIST dataset.}
+    \label{fig:mnist_results}
+\end{figure}
 
 
 \subsection{Traffic Signs Dataset}
